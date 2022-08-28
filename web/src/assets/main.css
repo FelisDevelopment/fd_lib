@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+
+:root,
+[data-theme] {
+	background-color: transparent;
+	color: hsla(var(--bc) / var(--tw-text-opacity, 1));
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: all 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+.fade-enter-active {
+	transition-delay: 0.2s;
+}
+
+ul {
+	@apply list-disc;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+/* .scl {
+	scrollbar-width: thin;
+	scrollbar-color: #6969dd #e0e0e0;
+} */
+
+.scl::-webkit-scrollbar-thumb {
+	@apply bg-primary/50 rounded-lg;
+	/* background-color: blue;    color of the scroll thumb */
+	/* border-radius: 20px;       roundness of the scroll thumb */
+	/* border: 3px solid orange;  creates padding around scroll thumb */
+}
+
+.scl::-webkit-scrollbar {
+	width: 5px;
+}
+
+.scl::-webkit-scrollbar-track {
+	@apply bg-neutral/50;
+}
+
+@tailwind utilities;
