@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex w-full justify-between gap-1">
+			<div class="flex w-full gap-1">
 				<transition-group
 					enter-active-class="duration-300 ease-out"
 					enter-from-class="transform opacity-0"
