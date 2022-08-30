@@ -30,6 +30,7 @@ export const useApp = defineStore({
 			compass: false,
 			vehicleIndicator: false,
 			context: false,
+			notifications: false,
 		},
 		hudForcefullyHidden: false,
 		safezone: {
