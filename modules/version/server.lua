@@ -47,4 +47,4 @@ function FD.version.check(self, repository, isKeyMaster)
         end, "GET")
 end
 
-FD.version:check('FelisDevelopment/fd_lib', true)
+FD.version:check('FelisDevelopment/fd_lib')
