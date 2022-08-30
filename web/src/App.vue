@@ -15,6 +15,7 @@ import Incidators from './components/Incidators.vue'
 import Compass from './components/Compass.vue'
 import VehicleIndicators from './components/VehicleIndicators.vue'
 import Context from './components/Context.vue'
+import Notifications from './components/Notifications.vue'
 
 // Minigames
 import CombinationMinigame from './components/CombinationMinigame.vue'
@@ -53,6 +54,9 @@ const events: { [key: string]: Function } = {
 	},
 	updateTheme: (event: any) => {
 		app.updateTheme(event.theme)
+	},
+	isMinimapShown: (event: any) => {
+		app.isMinimapShown = event.isShown
 	},
 }
 
@@ -135,5 +139,6 @@ function handleMessage(event: any) {
 		<Compass />
 		<VehicleIndicators />
 		<Context />
+		<Notifications />
 	</main>
 </template>

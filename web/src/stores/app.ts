@@ -30,6 +30,7 @@ export const useApp = defineStore({
 			compass: false,
 			vehicleIndicator: false,
 			context: false,
+			notifications: false,
 		},
 		hudForcefullyHidden: false,
 		safezone: {
@@ -42,6 +43,7 @@ export const useApp = defineStore({
 			height: 0,
 			top: 0,
 		} as { [key: string]: any },
+		isMinimapShown: false,
 	}),
 	getters: {
 		getSafezoneStyles: (state) => `right: ${state.safezone.x}px; left: ${state.safezone.x}px; top: ${state.safezone.y}px; bottom: ${state.safezone.y}px;`,
