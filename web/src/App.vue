@@ -54,6 +54,9 @@ const events: { [key: string]: Function } = {
 	updateTheme: (event: any) => {
 		app.updateTheme(event.theme)
 	},
+	isMinimapShown: (event: any) => {
+		app.isMinimapShown = event.isShown
+	},
 }
 
 onMounted(() => {
