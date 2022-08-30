@@ -6,8 +6,8 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
 	base: '/web/dist/',
-	// base: '/html/',
 	build: {
+		// watch: {},
 		emptyOutDir: true,
 	},
 	plugins: [
