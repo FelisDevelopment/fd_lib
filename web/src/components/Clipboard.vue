@@ -10,7 +10,6 @@ const emitter: any = inject('emitter')
 const resource: string | undefined = inject('resource')
 
 function handleCopy(succ: boolean) {
-	//@ts-ignore:next-line
 	useAxios(`https://${resource}/copied`, {
 		method: 'POST',
 		data: {

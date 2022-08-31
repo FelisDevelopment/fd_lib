@@ -88,7 +88,6 @@ function reset() {
 		data = initialData()
 	}, 500)
 
-	//@ts-ignore:next-line
 	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
 		method: 'POST',
 		data: {
@@ -100,8 +99,7 @@ function reset() {
 }
 
 function CloseModal() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/modalResult`, {
+	useAxios(`https://${resource}/modalResult`, {
 		method: 'POST',
 		data: false,
 	})
@@ -110,8 +108,7 @@ function CloseModal() {
 }
 
 function SubmitModal() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/modalResult`, {
+	useAxios(`https://${resource}/modalResult`, {
 		method: 'POST',
 		data: true,
 	})
@@ -127,8 +124,7 @@ emitter.on('modal:open', (dialog: any) => {
 
 	apps.modal = true
 
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: true,

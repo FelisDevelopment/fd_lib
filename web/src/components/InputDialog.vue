@@ -80,8 +80,7 @@ function reset() {
 	apps.input = false
 	data = null
 
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: false,
@@ -92,8 +91,7 @@ function reset() {
 }
 
 function CloseDialog() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/dialogResult`, {
+	useAxios(`https://${resource}/dialogResult`, {
 		method: 'POST',
 		data: {
 			cancelled: true,
@@ -104,8 +102,7 @@ function CloseDialog() {
 }
 
 function SubmitDialog() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/dialogResult`, {
+	useAxios(`https://${resource}/dialogResult`, {
 		method: 'POST',
 		data: data?.inputs,
 	})
@@ -120,8 +117,7 @@ emitter.on('input:open', (dialog: any) => {
 
 	apps.input = true
 
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: true,
