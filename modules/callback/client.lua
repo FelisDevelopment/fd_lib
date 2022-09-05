@@ -2,6 +2,7 @@
 
 local events = {}
 local timers = {}
+local registered = {}
 local cbEvent = ('__fd_cb_%s')
 
 RegisterNetEvent(cbEvent:format(resource), function(key, ...)
@@ -61,9 +62,7 @@ local function triggerServerCallback(_, event, delay, cb, ...)
 end
 
 ---@overload fun(event: string, delay: number, cb: function, ...)
-FD.callback = setmetatable({}, {
-    __call = triggerServerCallback
-})
+FD.callback.trigger = triggerServerCallback
 
 ---@param event string
 ---@param delay number prevent the event from being called for the given time
@@ -91,7 +90,11 @@ local pcall = pcall
 ---@param cb function
 --- Registers an event handler and callback function to respond to server requests.
 function FD.callback.register(name, cb)
-    RegisterNetEvent(cbEvent:format(name), function(resource, key, ...)
+    if registered[cbEvent:format(name)] then
+        RemoveEventHandler(registered[cbEvent:format(name)])
+    end
+
+    registered[cbEvent:format(name)] = RegisterNetEvent(cbEvent:format(name), function(resource, key, ...)
         TriggerServerEvent(cbEvent:format(resource), key, callbackResponse(pcall(cb, ...)))
     end)
 end
