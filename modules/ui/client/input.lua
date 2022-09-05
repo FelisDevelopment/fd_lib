@@ -5,7 +5,7 @@ local dialogs = {
 
 -- Various UI functions
 function FD.ui.registerDialog(id, data)
-    if next(dialogs.registered[id]) then
+    if dialogs.registered[id] then
         print(("Dialog with id %s already registered, please use unique name!"):format(id))
         return false
     end
