@@ -1,6 +1,7 @@
 -- https://github.com/overextended/ox_lib/blob/master/imports/callback/server.lua
 
 local events = {}
+local registered = {}
 local cbEvent = ('__fd_cb_%s')
 
 RegisterNetEvent(cbEvent:format(resource), function(key, ...)
@@ -42,9 +43,7 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
 end
 
 ---@overload fun(event: string, playerId: number, cb: function, ...)
-FD.callback = setmetatable({}, {
-    __call = triggerClientCallback
-})
+FD.callback.trigger = triggerServerCallback
 
 ---@param event string
 ---@param playerId number
@@ -72,7 +71,11 @@ local pcall = pcall
 ---@param cb function
 --- Registers an event handler and callback function to respond to client requests.
 function FD.callback.register(name, cb)
-    RegisterNetEvent(cbEvent:format(name), function(resource, key, ...)
+    if registered[cbEvent:format(name)] then
+        RemoveEventHandler(registered[cbEvent:format(name)])
+    end
+
+    registered[cbEvent:format(name)] = RegisterNetEvent(cbEvent:format(name), function(resource, key, ...)
         TriggerClientEvent(cbEvent:format(resource), source, key, callbackResponse(pcall(cb, source, ...)))
     end)
 end
