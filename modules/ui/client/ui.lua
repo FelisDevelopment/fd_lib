@@ -51,6 +51,19 @@ function FD.ui.hideIndicators(bool)
     })
 end
 
+function FD.ui.overrideLocaleKeys(data)
+    SendNUIMessage({
+        event = "overrideLocaleKeys",
+        data = {
+            locale = data
+        }
+    })
+
+    for key, value in pairs(data) do
+        setLocaleKey(key, value)
+    end
+end
+
 function FD.ui.forceHide(bool)
     forceHide = bool
 end
