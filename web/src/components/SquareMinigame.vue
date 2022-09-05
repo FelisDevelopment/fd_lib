@@ -65,6 +65,8 @@ import { Squares, type GeneratedMinigame } from './Squares/Squares'
 
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 import { useApp } from '@/stores/app'
 import { useLocale } from '@/stores/locale'
 
@@ -73,8 +75,6 @@ const emitter: any = inject('emitter')
 
 const locale = useLocale()
 const { apps } = useApp()
-
-const resource: string | undefined = inject('resource')
 
 function initialData() {
 	return {
@@ -260,7 +260,7 @@ function reset() {
 }
 
 function failed() {
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: false,
@@ -269,7 +269,7 @@ function failed() {
 }
 
 function success() {
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: true,

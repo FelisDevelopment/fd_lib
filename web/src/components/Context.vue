@@ -87,6 +87,8 @@ import { useLocale } from '../stores/locale'
 // Import necessary components
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 import Input from './Dialog/Input.vue'
 import Sepator from './Dialog/Sepator.vue'
 import TextArea from './Dialog/TextArea.vue'
@@ -100,7 +102,6 @@ import Text from './Dialog/Text.vue'
 const { apps } = useApp()
 const locale = useLocale()
 
-const resource: string | undefined = inject('resource')
 const emitter: any = inject('emitter')
 
 // Define Input Types
@@ -137,7 +138,7 @@ function closeContext() {
 }
 
 function triggerButtonAction(index: number) {
-	useAxios(`https://${resource}/contextButtonTriggered`, {
+	useAxios(`https://${resource()}/contextButtonTriggered`, {
 		method: 'POST',
 		data: {
 			index: index,
@@ -146,7 +147,7 @@ function triggerButtonAction(index: number) {
 }
 
 function tabLinkClose(tabIndex: number) {
-	useAxios(`https://${resource}/tabCloseTriggered`, {
+	useAxios(`https://${resource()}/tabCloseTriggered`, {
 		method: 'POST',
 		data: {
 			index: tabIndex,
@@ -158,7 +159,7 @@ function submitSectionForm(tabIndex: number, sectionIndex: number) {
 	const tab = tabs[tabIndex]
 	const form = tab?.sections[sectionIndex].components ?? null
 
-	useAxios(`https://${resource}/sectionSubmit`, {
+	useAxios(`https://${resource()}/sectionSubmit`, {
 		method: 'POST',
 		data: {
 			data: form,
@@ -176,7 +177,7 @@ emitter.on('context:open', (event: ContextData) => {
 	let temp = 0
 
 	if (!apps.context) {
-		useAxios(`https://${resource}/enableFocus`, {
+		useAxios(`https://${resource()}/enableFocus`, {
 			method: 'POST',
 			data: {
 				isFocused: true,
@@ -228,7 +229,7 @@ emitter.on('context:close', () => {
 	tabs = {}
 	// activeTabIndex = null
 
-	useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource()}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: false,

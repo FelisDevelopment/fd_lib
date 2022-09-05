@@ -27,6 +27,8 @@ import type { DialogData, InputTypes } from '..//interfaces/dialog.interface'
 import { useApp } from '../stores/app'
 import { useLocale } from '../stores/locale'
 
+import { resource } from '@/utils'
+
 // Import necessary components
 import { useAxios } from '@vueuse/integrations/useAxios'
 
@@ -44,8 +46,6 @@ const emitter: any = inject('emitter')
 
 const { apps } = useApp()
 const locale = useLocale()
-
-const resource: string | undefined = inject('resource')
 
 // Define Input Types
 const inputTypes = {
@@ -80,7 +80,7 @@ function reset() {
 	apps.input = false
 	data = null
 
-	useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource()}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: false,
@@ -91,7 +91,7 @@ function reset() {
 }
 
 function CloseDialog() {
-	useAxios(`https://${resource}/dialogResult`, {
+	useAxios(`https://${resource()}/dialogResult`, {
 		method: 'POST',
 		data: {
 			cancelled: true,
@@ -102,7 +102,7 @@ function CloseDialog() {
 }
 
 function SubmitDialog() {
-	useAxios(`https://${resource}/dialogResult`, {
+	useAxios(`https://${resource()}/dialogResult`, {
 		method: 'POST',
 		data: data?.inputs,
 	})
@@ -117,7 +117,7 @@ emitter.on('input:open', (dialog: any) => {
 
 	apps.input = true
 
-	useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource()}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: true,
