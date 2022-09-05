@@ -52,6 +52,8 @@ import { useLocale } from '../stores/locale'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 interface Modal {
 	content: string
 	submit: boolean
@@ -68,8 +70,6 @@ interface Modal {
 const emitter: any = inject('emitter')
 const { apps } = useApp()
 const locale = useLocale()
-
-const resource: string | undefined = inject('resource')
 
 function initialData(): Modal {
 	return {
@@ -88,8 +88,7 @@ function reset() {
 		data = initialData()
 	}, 500)
 
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource()}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: false,
@@ -100,8 +99,7 @@ function reset() {
 }
 
 function CloseModal() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/modalResult`, {
+	useAxios(`https://${resource()}/modalResult`, {
 		method: 'POST',
 		data: false,
 	})
@@ -110,8 +108,7 @@ function CloseModal() {
 }
 
 function SubmitModal() {
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/modalResult`, {
+	useAxios(`https://${resource()}/modalResult`, {
 		method: 'POST',
 		data: true,
 	})
@@ -127,8 +124,7 @@ emitter.on('modal:open', (dialog: any) => {
 
 	apps.modal = true
 
-	//@ts-ignore:next-line
-	const { data: result, isFinished } = useAxios(`https://${resource}/enableFocus`, {
+	useAxios(`https://${resource()}/enableFocus`, {
 		method: 'POST',
 		data: {
 			isFocused: true,

@@ -1,4 +1,4 @@
-local controlsLoop
+controlsLoop = nil
 
 function FD.utils.disableControls(controls)
     if not controls then
@@ -12,6 +12,12 @@ function FD.utils.disableControls(controls)
 
             while controlsLoop do
                 Citizen.Wait(0)
+                if not controls.enablePause then
+                    DisableControlAction(0, 199, true)
+                    DisableControlAction(0, 200, true)
+                    DisableControlAction(0, 322, true)
+                end
+
                 if not controls.enableMouse then
                     DisableControlAction(0, 1, true);
                     DisableControlAction(0, 2, true);

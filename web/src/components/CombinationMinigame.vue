@@ -26,6 +26,8 @@ import { random, waitFor, shuffle } from '../utils'
 
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 import { useApp } from '@/stores/app'
 import { useLocale } from '@/stores/locale'
 
@@ -34,8 +36,6 @@ const emitter: any = inject('emitter')
 
 const locale = useLocale()
 const { apps } = useApp()
-
-const resource: string | undefined = inject('resource')
 
 function initialData(): { [key: string]: any } {
 	return {
@@ -225,7 +225,7 @@ async function success() {
 
 	await waitFor(2000)
 
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: true,
@@ -240,7 +240,7 @@ async function failed() {
 
 	await waitFor(2000)
 
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: false,

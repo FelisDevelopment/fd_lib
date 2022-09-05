@@ -1,12 +1,3 @@
-const getResource = () => {
-	try {
-		//@ts-ignore:next-line
-		return GetParentResourceName()
-	} catch (err) {
-		return 'test'
-	}
-}
-
 const waitFor = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min
 
@@ -26,12 +17,8 @@ const shuffle = (arr: Array<any>) => {
 }
 
 const resource = () => {
-	try {
-		//@ts-ignore:next-line
-		return GetParentResourceName()
-	} catch (err) {
-		return 'test'
-	}
+	//@ts-ignore
+	return import.meta.env.DEV ? 'development' : GetParentResourceName()
 }
 
-export { getResource, waitFor, random, range, shuffle, resource }
+export { waitFor, random, range, shuffle, resource }

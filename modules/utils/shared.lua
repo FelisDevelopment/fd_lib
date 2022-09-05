@@ -35,6 +35,16 @@ function FD.utils.unpack(tbl)
     return tbl
 end
 
+function FD.utils.promiseTimeout(timeout)
+    local p = promise:new()
+
+    SetTimeout(timeout or 3000, function()
+        p:resolve(false)
+    end)
+
+    return p
+end
+
 -- Necessary stuff
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then

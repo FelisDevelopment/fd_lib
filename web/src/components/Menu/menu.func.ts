@@ -1,5 +1,5 @@
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { getResource, waitFor } from '@/utils'
+import { resource, waitFor } from '@/utils'
 import { useApp } from '@/stores/app'
 
 interface MenuItemInferface {
@@ -151,7 +151,7 @@ class Menu {
 	}
 
 	activeItemChanged(oldIndex: number) {
-		useAxios(`https://${getResource()}/processActiveItemChange`, {
+		useAxios(`https://${resource()}/processActiveItemChange`, {
 			method: 'POST',
 			data: {
 				current: this.index + 1,
@@ -187,7 +187,7 @@ class Menu {
 		if (item.options?.menu) {
 			lastMenus.push(this.id)
 
-			useAxios(`https://${getResource()}/openSubMenu`, {
+			useAxios(`https://${resource()}/openSubMenu`, {
 				method: 'POST',
 				data: {
 					id: item.options.menu,
@@ -197,7 +197,7 @@ class Menu {
 			return
 		}
 
-		useAxios(`https://${getResource()}/processClick`, {
+		useAxios(`https://${resource()}/processClick`, {
 			method: 'POST',
 			data: value,
 		})
@@ -209,7 +209,7 @@ class Menu {
 		if (lastMenus.length > 0) {
 			const id = lastMenus.pop()
 
-			useAxios(`https://${getResource()}/openSubMenu`, {
+			useAxios(`https://${resource()}/openSubMenu`, {
 				method: 'POST',
 				data: {
 					id,
@@ -219,7 +219,7 @@ class Menu {
 			return
 		}
 
-		useAxios(`https://${getResource()}/closeMenu`, {
+		useAxios(`https://${resource()}/closeMenu`, {
 			method: 'POST',
 		})
 
@@ -265,7 +265,7 @@ class MenuSelection implements MenuSelectionInterface {
 	}
 
 	onItemChange(index: number, old: number, currentIndex: number) {
-		useAxios(`https://${getResource()}/processListItemChange`, {
+		useAxios(`https://${resource()}/processListItemChange`, {
 			method: 'POST',
 			data: {
 				index: currentIndex + 1,

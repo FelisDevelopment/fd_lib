@@ -5,13 +5,12 @@ import { inject } from 'vue'
 // Import necessary components
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 const emitter: any = inject('emitter')
 
-const resource: string | undefined = inject('resource')
-
 function handleCopy(succ: boolean) {
-	//@ts-ignore:next-line
-	useAxios(`https://${resource}/copied`, {
+	useAxios(`https://${resource()}/copied`, {
 		method: 'POST',
 		data: {
 			copied: succ,

@@ -9,6 +9,7 @@ export default defineConfig({
 	build: {
 		// watch: {},
 		emptyOutDir: true,
+		assetsDir: 'static',
 	},
 	plugins: [
 		vue({

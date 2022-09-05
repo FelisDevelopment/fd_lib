@@ -23,6 +23,10 @@ function locale(str, ...)
     return ("Translation for '%s' does not exist"):format(str)
 end
 
+function setLocaleKey(key, value)
+    dict[key] = value
+end
+
 RegisterNUICallback('getLocale', function(_, cb)
     cb(dict)
 end)

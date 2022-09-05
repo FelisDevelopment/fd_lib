@@ -65,6 +65,8 @@ import { Squares, type GeneratedMinigame } from './Squares/Squares'
 
 import { useAxios } from '@vueuse/integrations/useAxios'
 
+import { resource } from '@/utils'
+
 import { useApp } from '@/stores/app'
 import { useLocale } from '@/stores/locale'
 
@@ -73,8 +75,6 @@ const emitter: any = inject('emitter')
 
 const locale = useLocale()
 const { apps } = useApp()
-
-const resource: string | undefined = inject('resource')
 
 function initialData() {
 	return {
@@ -106,7 +106,7 @@ let progressBar: HTMLDivElement = $ref<HTMLDivElement>()
 let timer: HTMLDivElement = $ref<HTMLDivElement>()
 
 let minigame = $ref<{ [key: string]: any }>(initialData())
-let generated = $ref<GeneratedMinigame | null>()
+let generated = $ref<GeneratedMinigame>()
 let data = $ref<{ [key: string]: any }>()
 
 let splashScreen = (show = true) => {
@@ -155,7 +155,6 @@ async function start() {
 
 	await waitFor(1000)
 	generated?.groups.forEach((group, index) => {
-		//@ts-ignore:next-line
 		generated.groups[index].style = {
 			fontSize: '0px',
 		}
@@ -165,7 +164,6 @@ async function start() {
 	minigame.gameStarted = true
 
 	generated?.groups.forEach((group, index) => {
-		//@ts-ignore:next-line
 		generated.groups[index].style = {
 			display: 'none',
 		}
@@ -259,11 +257,10 @@ function reset() {
 	progressBar.style.width = '100%'
 
 	minigame = initialData()
-	generated = null
 }
 
 function failed() {
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: false,
@@ -272,7 +269,7 @@ function failed() {
 }
 
 function success() {
-	useAxios(`https://${resource}/minigameResult`, {
+	useAxios(`https://${resource()}/minigameResult`, {
 		method: 'POST',
 		data: {
 			passed: true,

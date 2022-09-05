@@ -29,7 +29,7 @@ import PathMinigame from './components/PathMinigame.vue'
 import { useApp } from './stores/app'
 import { useLocale } from './stores/locale'
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { getResource } from '@/utils'
+import { resource } from '@/utils'
 
 const app = useApp()
 const locale = useLocale()
@@ -58,14 +58,19 @@ const events: { [key: string]: Function } = {
 	isMinimapShown: (event: any) => {
 		app.isMinimapShown = event.isShown
 	},
+	overrideLocaleKeys: (event: any) => {
+		locale.overrideLocaleKeys(event)
+	},
 }
 
 onMounted(() => {
 	window.addEventListener('message', handleMessage)
 
-	locale.initLocale()
-	app.updateSafezoneSettings()
-	app.initializeTheme()
+	if (!import.meta.env.DEV) {
+		locale.initLocale()
+		app.updateSafezoneSettings()
+		app.initializeTheme()
+	}
 })
 
 function handleMessage(event: any) {
@@ -73,7 +78,7 @@ function handleMessage(event: any) {
 		for (const item in app.apps) {
 			//@ts-ignore
 			if (app.apps[item]) {
-				useAxios(`https://${getResource()}/openCheckCallback`, {
+				useAxios(`https://${resource()}/openCheckCallback`, {
 					method: 'POST',
 					data: {
 						app: item,
@@ -85,7 +90,7 @@ function handleMessage(event: any) {
 			}
 		}
 
-		useAxios(`https://${getResource()}/openCheckCallback`, {
+		useAxios(`https://${resource()}/openCheckCallback`, {
 			method: 'POST',
 			data: {
 				isOpen: false,
@@ -118,7 +123,7 @@ function handleMessage(event: any) {
 </script>
 
 <template>
-	<main class="absolute inset-0 grid place-items-center bg-transparent" :style="[app.getSafezoneStyles]" v-show="app.shown">
+	<main class="absolute inset-0 grid place-items-center bg-transparent" :style="[app.getSafezoneStyles ?? `inset-0`]" v-show="app.shown">
 		<Clipboard />
 		<Modal />
 		<SimpleAction />

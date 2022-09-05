@@ -134,15 +134,13 @@ emitter.on('menu:open', async (data: any) => {
 
 	await Promise.all(
 		data.items.map((item: MenuItemInferface | MenuSelectionInterface) => {
-			if (item.component === 'selection') {
-				item = item as MenuSelectionInterface
+			if (item.component === 'selection' && 'values' in item) {
 				const options = item.options || {}
 
 				if (item.onChange) {
 					options.onChange = true
 				}
 
-				//@ts-ignore:next-line
 				items.push(new MenuSelection(item.title, item.values, item.selected || 0, options))
 				return
 			}

@@ -21,11 +21,21 @@ export const useLocale = defineStore({
 				data: {},
 			})
 
+			if (!value) return
+
 			this.ui = value.ui
 		},
 
 		setLocale(locale: any) {
 			this.ui = locale.ui
+		},
+
+		overrideLocaleKeys(event: { [key: string]: string }) {
+			if (Object.keys(event.locale).length <= 0) return
+
+			for (const [key, value] of Object.entries(event.locale)) {
+				this.ui[key] = value
+			}
 		},
 	},
 })
