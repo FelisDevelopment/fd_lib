@@ -31,6 +31,7 @@ specifiers:
   vite: ^2.8.4
   vue: ^3.2.31
   vue-tsc: ^0.31.4
+  vue3-keypress: ^4.0.1
 
 dependencies:
   '@headlessui/vue': 1.6.7_vue@3.2.37
@@ -44,6 +45,7 @@ dependencies:
   mitt: 3.0.0
   pinia: 2.0.21_khqcrm3nbfs7aq4aok36jjwtje
   vue: 3.2.37
+  vue3-keypress: 4.0.1
 
 devDependencies:
   '@rushstack/eslint-patch': 1.1.4
@@ -2550,6 +2552,10 @@ packages:
       '@vue/runtime-dom': 3.2.37
       '@vue/server-renderer': 3.2.37_vue@3.2.37
       '@vue/shared': 3.2.37
+
+  /vue3-keypress/4.0.1:
+    resolution: {integrity: sha512-oKxLpVsQq1iosuwi38fbH+K2NL2HqbFT8U7yE1fzxcUB0Mup1vS7OcnNMqkgv+FHFJTNvlYAOwLctVK/ahz6Ng==}
+    dev: false
 
   /which/2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
