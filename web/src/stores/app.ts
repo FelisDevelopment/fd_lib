@@ -6,9 +6,9 @@ import { useAxios } from '@vueuse/integrations/useAxios'
 export const useApp = defineStore({
 	id: 'app',
 	state: () => ({
-		shown: false,
+		shown: true,
 		partiallyShown: false,
-		theme: 'light',
+		theme: 'night',
 		apps: {
 			input: false,
 			clipboard: false,
@@ -31,6 +31,7 @@ export const useApp = defineStore({
 			vehicleIndicator: false,
 			context: false,
 			notifications: false,
+			radio: false,
 		},
 		hudForcefullyHidden: false,
 		safezone: {
@@ -66,6 +67,8 @@ export const useApp = defineStore({
 				method: 'POST',
 				data: {},
 			})
+
+			if (!value) return
 
 			this.safezone.x = value.x
 			this.safezone.y = value.y
