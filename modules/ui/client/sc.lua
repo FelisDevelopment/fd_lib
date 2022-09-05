@@ -1,6 +1,9 @@
 local checks = {}
 local listening = false
 
+if GetResourceState('nb-keyevent'):find('start') then
+    load(LoadResourceFile('nb-keyevent', 'nb-keyevent.lua'))()
+end
 
 local function getRandomKey(tbl)
     local keys = {}
@@ -453,6 +456,10 @@ function checks.circle(duration, difficulty, minPosition, flipped, reverse)
 end
 
 function FD.ui.sc(cycles, settings)
+    if not GetResourceState('nb-keyevent'):find('started') then
+        return FD.logger.err('nb-keyvent is not started, you cannot use skillcheck.')
+    end
+
     if LocalPlayer.state.isBusy then return end
 
     if listening then
@@ -468,7 +475,7 @@ function FD.ui.sc(cycles, settings)
     for i = 1, cycles do
         local temp = settings
 
-        if type(settings[i]) == 'table' then
+        if settings and type(settings[i]) == 'table' then
             temp = settings[i]
         end
 
