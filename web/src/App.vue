@@ -16,7 +16,6 @@ import Compass from './components/Compass.vue'
 import VehicleIndicators from './components/VehicleIndicators.vue'
 import Context from './components/Context.vue'
 import Notifications from './components/Notifications.vue'
-import Inventory from './components/Inventory.vue'
 
 // Minigames
 import CombinationMinigame from './components/CombinationMinigame.vue'
@@ -58,6 +57,9 @@ const events: { [key: string]: Function } = {
 	},
 	isMinimapShown: (event: any) => {
 		app.isMinimapShown = event.isShown
+	},
+	overrideLocaleKeys: (event: any) => {
+		locale.overrideLocaleKeys(event)
 	},
 }
 
@@ -143,6 +145,5 @@ function handleMessage(event: any) {
 		<VehicleIndicators />
 		<Context />
 		<Notifications />
-		<Inventory />
 	</main>
 </template>
