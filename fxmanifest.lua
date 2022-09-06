@@ -34,7 +34,6 @@ shared_scripts {
 }
 
 client_scripts {
-    '@nb-keyevent/nb-keyevent.lua',
     'modules/**/client.lua',
     'modules/**/client/*.lua'
 }
