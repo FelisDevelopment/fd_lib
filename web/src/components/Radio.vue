@@ -3,11 +3,11 @@
 		class="absolute bottom-0 right-2 transform transition duration-150 ease-linear"
 		:class="{
 			'translate-y-[15vh]': app.apps.radio,
-			'translate-y-[1000px]': !app.apps.radio,
+			'translate-y-[3500px]': !app.apps.radio,
 		}"
 	>
 		<img :src="radio.getThemeFrame" class="h-[70vh] drop-shadow-2xl" />
-		<div class="absolute top-[35.5%] left-[22.4%] bg-base-300 w-[55.2%] h-[30.35%] rounded-[6.2%] overflow-hidden" ref="tabsList">
+		<div class="absolute top-[35.5%] left-[22.4%] bg-base-300 w-[55.2%] h-[30.35%] rounded-[6.2%] overflow-hidden z-10" ref="tabsList">
 			<transition-group name="fade" mode="out-in">
 				<component v-for="(component, index) in tabList" :is="component" :key="index" v-show="index === radio.currentTab" />
 			</transition-group>
@@ -16,6 +16,7 @@
 </template>
 <script setup lang="ts">
 import { inject, type Component } from 'vue'
+//@ts-ignore
 import { useKeypress } from 'vue3-keypress'
 
 import { resource } from '@/utils'
