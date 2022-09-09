@@ -1,10 +1,9 @@
 fx_version 'cerulean'
-use_experimental_fxv2_oal 'yes'
 lua54 'yes'
 game 'gta5'
 
 name 'fd_lib'
-version      '1.4.4'
+version '1.5.0'
 license 'LGPL-3.0-or-later'
 repository 'https://https://github.com/FelisDevelopment/fd_lib'
 description 'A library of shared functions to utilise in other resources.'

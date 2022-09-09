@@ -62,7 +62,9 @@ local function triggerServerCallback(_, event, delay, cb, ...)
 end
 
 ---@overload fun(event: string, delay: number, cb: function, ...)
-FD.callback.trigger = triggerServerCallback
+function FD.callback.execute(event, delay, cb, ...)
+    triggerServerCallback(false, event, delay, cb, ...)
+end
 
 ---@param event string
 ---@param delay number prevent the event from being called for the given time
