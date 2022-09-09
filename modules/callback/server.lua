@@ -43,7 +43,9 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
 end
 
 ---@overload fun(event: string, playerId: number, cb: function, ...)
-FD.callback.trigger = triggerServerCallback
+function FD.callback.execute(event, playerId, cb, ...)
+    triggerServerCallback(false, event, playerId, cb, ...)
+end
 
 ---@param event string
 ---@param playerId number
