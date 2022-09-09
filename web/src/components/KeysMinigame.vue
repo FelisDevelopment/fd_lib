@@ -109,6 +109,8 @@ function ensureFocus() {
 function reset() {
 	hackWrapper.classList.add('hidden')
 	splashWrapper.classList.remove('hidden')
+
+	minigame = initialData()
 }
 
 async function failed() {
