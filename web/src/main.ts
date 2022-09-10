@@ -14,4 +14,4 @@ app.provide('emitter', emitter)
 
 app.provide('resource', resource())
 
-app.mount('#app')
+app.mount('#felisUi')
