@@ -120,7 +120,7 @@ end
 -- inverted: false,
 -- hideQuestion: false,
 -- debug: true,
-function FD.ui.squares(duration, squares, inverted, invertTyping, hideQuestion, debug)
+function FD.ui.squares(duration, squares, rounds, inverted, invertTyping, hideQuestion, debug)
     if LocalPlayer.state.isBusy then return end
 
     squares = squares <= 2 and 3 or (squares > 7 and 7 or squares)
@@ -135,6 +135,7 @@ function FD.ui.squares(duration, squares, inverted, invertTyping, hideQuestion, 
         show = true,
         data = {
             duration = duration,
+            rounds = rounds or 1,
             squares = squares,
             inverted = inverted,
             invertTyping = invertTyping,

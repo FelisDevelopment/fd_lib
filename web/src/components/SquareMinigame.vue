@@ -81,6 +81,7 @@ function initialData() {
 		gameStarted: false,
 		model: '',
 		timerGame: null,
+		rounds: 1,
 	}
 }
 
@@ -135,6 +136,8 @@ function invertTyping() {
 		invertText()
 	}
 }
+
+async function startOtherRound() {}
 
 async function start() {
 	generated = Squares.generate(data.squares)
@@ -211,18 +214,41 @@ async function check() {
 	audioTimer.pause()
 
 	const localizedAnswer = `${locale.t(generated?.quiz1.solution)} ${locale.t(generated?.quiz2.solution)}`.toLowerCase()
-
 	if (localizedAnswer === minigame.model.toLowerCase()) {
-		splashScreen()
-		icon.innerHTML = '&#xf21b;'
-		message.innerHTML = locale.t('system_bypassed')
+		if (minigame.rounds === data.rounds) {
+			splashScreen()
+			icon.innerHTML = '&#xf21b;'
+			message.innerHTML = locale.t('system_bypassed')
 
-		await waitFor(2000)
+			await waitFor(2000)
 
-		reset()
-		success()
+			reset()
+			success()
 
-		return
+			return
+		} else {
+			minigameWrapper.querySelectorAll(`.${classes.group} > div, .${classes.timer}, .${classes.question}, .${classes.answer}, .${classes.solution}`).forEach((el) => {
+				el.classList.add('hidden')
+			})
+
+			minigameWrapper.querySelectorAll(`.${classes.real_number}`).forEach((el) => {
+				el.classList.remove('hidden')
+			})
+
+			if (!solutionWrapper.classList.contains('hidden')) {
+				solutionWrapper.classList.add('hidden')
+			}
+			solutionWrapper.classList.add('hidden')
+
+			progressBar.style.transitionDuration = `0s`
+			progressBar.style.width = '100%'
+			minigame.model = null
+
+			start()
+			minigame.rounds++
+
+			return
+		}
 	}
 
 	splashScreen()
@@ -234,7 +260,7 @@ async function check() {
 	failed()
 }
 
-function reset() {
+function reset(needsReset = true) {
 	apps.squareMinigame = false
 	audioSplash.pause()
 	audioSplash.currentTime = 0
@@ -256,7 +282,9 @@ function reset() {
 
 	progressBar.style.width = '100%'
 
-	minigame = initialData()
+	if (needsReset) {
+		minigame = initialData()
+	}
 }
 
 function failed() {
