@@ -1,4 +1,3 @@
-local available = {}
 local registered = {}
 local count = 0
 
@@ -7,24 +6,6 @@ function FD.dui.get(url, width, height)
     height = height or 256
 
     local size = ('%sx%s'):format(width, height)
-
-    if available[size] and #available[size] > 0 then
-        local firstKey, FirstValue = pairs(available[size])
-        local key, value = firstKey(FirstValue)
-
-        local id = value
-        local dict = registered[id].dict
-        local txt = registered[id].txt
-
-        table.remove(available[size], key)
-        SetDuiUrl(registered[id].object, url)
-
-        return {
-            id = id,
-            dict = dict,
-            txt = txt
-        }
-    end
 
     count = count + 1
     local generated = {
@@ -69,13 +50,6 @@ function FD.dui.remove(id)
         return
     end
 
-    local size = registered[id].size
-
-    SetDuiUrl(registered[id].objects.dui, 'about:blank')
-
-    if not available[size] then
-        available[size] = {}
-    end
-
-    table.insert(available[size], id)
+    DestroyDui(registered[id].objects.dui)
+    registered[id] = nil
 end
