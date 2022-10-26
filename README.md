@@ -1,5 +1,7 @@
 
-# Documentation coming soon
+# UI LIB
+Since I don't have much time to fully maintain and expand this resource - it will be re-done soon, leaving just UI part useable for everyone and for other stuff, moving to ox_lib.
+
 
 ### Some code is yoinked from overextended github, thanks to them, please give them a star [https://github.com/overextended](https://github.com/overextended)
 
