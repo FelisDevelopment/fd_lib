@@ -16,7 +16,6 @@ import Compass from './components/Compass.vue'
 import VehicleIndicators from './components/VehicleIndicators.vue'
 import Context from './components/Context.vue'
 import Notifications from './components/Notifications.vue'
-import Radio from './components/Radio.vue'
 
 // Minigames
 import CombinationMinigame from './components/CombinationMinigame.vue'
@@ -146,6 +145,5 @@ function handleMessage(event: any) {
 		<VehicleIndicators />
 		<Context />
 		<Notifications />
-		<Radio />
 	</main>
 </template>
